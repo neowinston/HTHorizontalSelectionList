@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hightower Inc. All rights reserved.
 //
 
+#define kFontSize (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 24.0 : 16.0)
+
 #import "HTHorizontalSelectionList.h"
 #import "HTHorizontalSelectionListScrollView.h"
 
@@ -334,7 +336,11 @@
         [button setTitleColor:self.buttonColorsByState[controlState] forState:controlState.integerValue];
     }
 
-    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    if (self.fontSize == 0) {
+        self.fontSize = kFontSize;
+    }
+
+    button.titleLabel.font = [UIFont systemFontOfSize:self.fontSize];
     [button sizeToFit];
 
     [button addTarget:self
